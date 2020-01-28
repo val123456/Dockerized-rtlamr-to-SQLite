@@ -30,7 +30,7 @@ This project has been tested on the following using my SCM electric and gas mete
 **Note**: This will not work on Mac OS X due to the way the USB is handled when using Docker.  I will release a version that works on Mac "soon".
 
 # Building/Using
-Download/clone source.  Open a terminal, `cd` into the top-level directory and run `docker-compose build` to build the container.  
+Download/clone source.  Open a terminal, `cd` into the top-level directory and run `docker-compose build` to build the containers.  
 
 Edit the text file `variables.txt` to include your meter ids.  It will work with gas, water, or electric meters.  See more info by reading the file and [docs/variables](docs/variables.md).
 
