@@ -8,7 +8,7 @@ I've been using rtlamr plus some custom collection and graphing code on my gener
 
 So far the results are very promising, and I have decided to open source the result.  Docker-ized RTLAMR Meter Scanner was the first release, designed to help potential users test rtlamr and see if their meter data can be collected ([https://gitlab.com/colinv/docker-rtlamr-meter-scanner](https://gitlab.com/colinv/docker-rtlamr-meter-scanner)). 
 
-This project, Docker-ized rtlamr to SQLite is the second release.  It reads the JSON output from rtlamr and puts the meter reading and calculated running current daily use in SQLite tables.  
+This project, Docker-ized rtlamr to SQLite is the second release.  Three Docker containers are deployed using docker-compose to run rtl_tcp, rtlamr, and a custom Python app to read the JSON output from rtlamr and store the meter reading and current daily use in an SQLite database.  Diagram and further explanation TBS.
 
 Storing the data in SQLite form allows for many uses.  The graph shown here [https://val123456.github.io/index.html](https://val123456.github.io/index.html) was generated with [Plotly](https://plot.ly/) and allows zooming, etc.  My third release will be the code used to generate graphs from the SQLite database.
 
