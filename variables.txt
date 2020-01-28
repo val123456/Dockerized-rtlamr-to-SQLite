@@ -1,0 +1,20 @@
+# will be exposed to python program as environment variables 
+
+# comma-separated list of message types to receive in rtlamr: all, scm, scm+, idm, netidm, r900 and r900bcd
+TYPES=scm,r900
+
+# comma separated list of meter IDs to for rtlamr command line options
+METER_IDS=629848,22277181,1563476986,44448439
+
+# specific meters by type to setup correct sqlite tables
+ELECTRIC_METER_IDS=629848,22277181
+GAS_METER_IDS=44448439
+WATER_METER_IDS=1563476986
+
+# hostname/IP and port of the rtl_tcp server, defaults to container name/default port.
+RTL_TCP_SERVER=rtl_tcp
+RTL_TCP_SERVER_PORT=1234
+
+# hostname/IP and port of the python server, defaults to container name/12345
+PYTHON_SERVER=python
+PYTHON_SERVER_PORT=12345

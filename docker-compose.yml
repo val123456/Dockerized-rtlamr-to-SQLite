@@ -1,0 +1,49 @@
+version: '3'
+services:
+
+  python:
+    build: ./py_read_rtlamr
+    stop_grace_period: 20s
+    # change to ../variables.txt to exclude from git
+    env_file: ./variables.txt
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "5m"
+            max-file: "2"
+    restart: unless-stopped
+    depends_on:
+      - rtl_tcp
+      - rtlamr
+    volumes:
+      - ../data:/data:rw
+      # - .tmp/share:/tmp/share:rw
+
+
+  rtl_tcp:
+    build: ./rtl_tcp
+    stop_grace_period: 4s
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "5m"
+            max-file: "2"
+    # need to run privileged to make USB access "easier"
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+
+  rtlamr:
+    build: ./rtlamr
+    stop_grace_period: 4s
+    # change to ../variables.txt to exclude from git
+    env_file: ./variables.txt
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "5m"
+            max-file: "2"
+    restart: unless-stopped
+    depends_on:
+      - rtl_tcp
