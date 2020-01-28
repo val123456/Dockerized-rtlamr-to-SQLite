@@ -32,7 +32,7 @@ This project has been tested on the following using my SCM electric and gas mete
 # Building/Using
 Download/clone source.  Open a terminal, `cd` into the top-level directory and run `docker-compose build` to build the container.  
 
-Edit the text file `variables.txt` to include your meter ids.  It will work with gas, water, or electric meters.  See more info by reading the file and [docs/variables](docs/variables.md)
+Edit the text file `variables.txt` to include your meter ids.  It will work with gas, water, or electric meters.  See more info by reading the file and [docs/variables](docs/variables.md).
 
 Then run `docker-compose up -d` to run it.  Output is placed in a directory called `data` at the same level (e. g., `../data/`.  To stop, use `docker-compose down`.
 
@@ -57,5 +57,5 @@ total 13M
 -rw-r--r-- 1 pi pi 6.6M Jan 25 11:31 raw_output.json
 ```
 
-Data is stored in SQLite.  The schema in SQL form is contained in [docs/schema](docs/schema.md).
+Data is stored in SQLite.  The schema in SQL form is contained in [docs/schema](docs/schema.md).  Note the meter IDs are used in the table names.  The documentation here shows my meter IDs.
  
