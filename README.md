@@ -12,6 +12,8 @@ This project, Docker-ized rtlamr to SQLite is the second release.  Three Docker 
 
 Storing the data in SQLite form allows for many uses.  The graph shown here [https://val123456.github.io/index.html](https://val123456.github.io/index.html) was generated with [Plotly](https://plot.ly/) and allows zooming, etc.  My third release will be the code used to generate graphs from the SQLite database.
 
+**Note**:  This project is hosted on Gitlab at [https://gitlab.com/colinv/docker-ized-rtlamr-to-sqlite](https://gitlab.com/colinv/docker-ized-rtlamr-to-sqlite) and mirrored to GitHub here [https://github.com/val123456/Dockerized-rtlamr-to-SQLite](https://github.com/val123456/Dockerized-rtlamr-to-SQLite)
+
 # Requirements 
 
 Linux OS with Docker and Docker Compose installed and an RTL2832U SDR.  I have had good luck with the dongles from RTL-SDR ([https://www.rtl-sdr.com/buy-rtl-sdr-dvb-t-dongles/](https://www.rtl-sdr.com/buy-rtl-sdr-dvb-t-dongles/)).
