@@ -26,7 +26,7 @@ This project has been tested on the following using my SCM electric and gas mete
 | ------------- | ------------- |------------|---------|
 | CentOS 7.7 (x86_64)|19.03.5|1.18.0|Dell PowerEdge T20|
 |Ubuntu 18.04.3 LTS (aarch64)|18.09.7|1.17.1|Raspberry Pi 3 B+|
-|Raspbian 10 (buster)|19.03.5|1.25.0|Raspberry Pi 4 B|
+|Raspbian 10 (buster)|19.03.5|1.25.0|Raspberry Pi 3 B+/Pi 4 B|
 
 
 **Note**: This will not work on Mac OS X due to the way the USB is handled when using Docker.  I will release a version that works on Mac "soon".
