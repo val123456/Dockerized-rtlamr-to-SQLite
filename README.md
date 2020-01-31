@@ -6,7 +6,7 @@ This project leverages the great work done by Douglas Hall ([https://github.com/
 
 I've been using rtlamr plus some custom collection and graphing code on my general purpose Linux server for several years to track electric usage and solar panel output.  In the middle of 2019 I decided to move it to a [Raspberry Pi](https://www.raspberrypi.org/).  At that time I decided to see if using [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) could help with managing deployment and fault tolerance.
 
-So far the results are very promising, and I have decided to open source the result.  Docker-ized RTLAMR Meter Scanner was the first release, designed to help potential users test rtlamr and see if their meter data can be collected ([https://gitlab.com/colinv/docker-rtlamr-meter-scanner](https://gitlab.com/colinv/docker-rtlamr-meter-scanner)). 
+So far the results are very promising, and I have decided to open source the result.  Docker-ized RTLAMR Meter Scanner was the first release, designed to help potential users test rtlamr and see if their meter data can be collected ([https://github.com/val123456/Docker-ized-RTLAMR-Meter-Scanner](https://github.com/val123456/Docker-ized-RTLAMR-Meter-Scanner)).
 
 This project, Docker-ized rtlamr to SQLite is the second release.  Three Docker containers are deployed using docker-compose to run rtl_tcp, rtlamr, and a custom Python app to read the JSON output from rtlamr and store the meter reading and current daily use in an SQLite database.  Diagram and further explanation TBS.
 
