@@ -15,12 +15,12 @@ sleep 3
 
 echo -e "\n${RED}Looking for meter IDs $METER_IDS\n"
 echo -e "${RED}Looking for meter types $TYPES\n"
-/root/go/bin/rtlamr -server=$RTL_TCP_SERVER:$RTL_TCP_SERVER_PORT -msgtype=$TYPES -format=json -unique=false -filterid=$METER_IDS | nc -w 900 $PYTHON_SERVER $PYTHON_SERVER_PORT &
-
-sleep 10
+/root/go/bin/rtlamr -server=$RTL_TCP_SERVER:$RTL_TCP_SERVER_PORT -msgtype=$TYPES -format=json -unique=false -filterid=$METER_IDS | nc -w 1800 $PYTHON_SERVER $PYTHON_SERVER_PORT &
 
 while true
 do
+
+    sleep 120
 
     if  ! pgrep -x rtlamr > /dev/null ; then
         echo "rtlamr died"
@@ -33,7 +33,5 @@ do
         killall rtlamr
         exit 1
     fi
-    
-    sleep 60
     
 done
