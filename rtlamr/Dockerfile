@@ -7,6 +7,7 @@ RUN apk add --no-cache \
         gcc \
         binutils \
         musl-dev \
+        procps \
         netcat-openbsd 
 
 RUN go get -v github.com/bemasher/rtlamr
