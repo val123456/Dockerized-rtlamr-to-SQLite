@@ -1,9 +1,9 @@
-# will be exposed to python program as environment variables 
+# will be exposed to python program as environment variables by Docker Compose
 
 # comma-separated list of message types to receive in rtlamr: all, scm, scm+, idm, netidm, r900 and r900bcd
 TYPES=scm,r900
 
-# comma separated list of meter IDs to for rtlamr command line options
+# comma separated list of meter IDs for rtlamr command line options
 METER_IDS=629848,22277181,1563476986,44448439
 
 # specific meters by type to setup correct sqlite tables
