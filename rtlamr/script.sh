@@ -22,23 +22,18 @@ sleep 10
 while true
 do
 
-    if  pgrep -x rtlamr > /dev/null ; then
-        # echo "rtlamr alive"
-        :
-    else
+    if  ! pgrep -x rtlamr > /dev/null ; then
         echo "rtlamr died"
         killall nc
         exit 1
     fi
 
-    if  pgrep -x nc > /dev/null ; then
-        # echo "nc alive"
-        :
-    else
+    if  ! pgrep -x nc > /dev/null ; then
         echo "nc died"
         killall rtlamr
         exit 1
     fi
+    
     sleep 60
     
 done
