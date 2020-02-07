@@ -14,6 +14,10 @@ Storing the data in SQLite form allows for many uses.  The graph shown here [htt
 
 **Note**:  This project is hosted on Gitlab at [https://gitlab.com/colinv/docker-ized-rtlamr-to-sqlite](https://gitlab.com/colinv/docker-ized-rtlamr-to-sqlite) and mirrored to GitHub here [https://github.com/val123456/Dockerized-rtlamr-to-SQLite](https://github.com/val123456/Dockerized-rtlamr-to-SQLite)
 
+# Caveats 
+
+I have developed this based on the meters I "own":  two SCM type electric meters, one SCM type gas meter, and one R900 water meter.  All of these meters provide a `Consumption` field that reflects the actual meter reading.  For information on other meter types, see the rtlamr documentation here:  [https://github.com/bemasher/rtlamr/wiki](https://github.com/bemasher/rtlamr/wiki). 
+
 # Requirements 
 
 Linux OS with Docker and Docker Compose installed and an RTL2832U SDR.  I have had good luck with the dongles from RTL-SDR ([https://www.rtl-sdr.com/buy-rtl-sdr-dvb-t-dongles/](https://www.rtl-sdr.com/buy-rtl-sdr-dvb-t-dongles/)).
