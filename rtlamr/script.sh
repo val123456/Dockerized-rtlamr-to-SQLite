@@ -25,6 +25,7 @@ echo -e "${RED}Looking for meter types $TYPES\n"
 /root/go/bin/rtlamr -server=$RTL_TCP_SERVER:$RTL_TCP_SERVER_PORT -msgtype=$TYPES -format=json -unique=false -filterid=$METER_IDS | nc -w 1800 $PYTHON_SERVER $PYTHON_SERVER_PORT &
 
 # simple status monitoring.  Checks to see if rltamr and nc programs are running, exits container if either dies.  Runs every 120 seconds
+# docker will restart after exit
 while true
 do
 
