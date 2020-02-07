@@ -9,7 +9,7 @@ import time
 from os import environ, fsync
 
 
-# catch sigterm to gracefully shutdown when sent shutdown by docker
+# catch sigterm to gracefully shutdown when sent shutdown by docker by raising KeyboardInterrupt exception 
 def handle_sigterm(*args):
     raise KeyboardInterrupt()
 
@@ -19,7 +19,7 @@ signal.signal(signal.SIGTERM, handle_sigterm)
 # function saveinput to save "raw" input for potential future reuse/reprocessing/etc
 # due to potentially large number of writes, leaves file open between writes, and appends data
 
-# open file
+# open file and leave open
 f = open("/data/raw_output.json", "ab+", buffering=0)
 
 
@@ -61,6 +61,7 @@ gas_meter_ids = environ['GAS_METER_IDS'].split(',')
 water_meter_ids = environ['WATER_METER_IDS'].split(',')
 
 # conversion constants to convert raw meter output to correct units
+# pure luck all my meters have the same conversion
 water_cnv = 100
 gas_cnv = 100
 electric_cnv = 100
@@ -70,7 +71,7 @@ port = int(environ['PYTHON_SERVER_PORT'])
 
 # initialize dictionary last to keep track of last meter reading to avoid saving duplicate readings
 # should not happen with rtlamr settings, but just in case . . . 
-# updated:  can happen with R900 water meters due to use of unknown fields
+# updated:  can happen with R900 water meters due to use of unknown fields in my meter
 
 last = {}
 for i in meter_ids:
@@ -89,7 +90,7 @@ DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 DATE_FORMAT = '%Y-%m-%d'
 TIME_FORMAT = '%H:%M:%S'
 
-# open database file using non-blocking journal settings so other process can read results for graphing, etc
+# open SQLite database file using non-blocking journal settings so other process can read results for graphing, etc
 db = sqlite3.connect('/data/meters.db')
 db.execute('pragma journal_mode=wal')
 con = db.cursor()
@@ -317,7 +318,7 @@ while True:
         conn.close()
         exit()
 
-    # logs exception and exits to allow docker-compose settings to restart
+    # logs exception and cleanly exits to allow docker-compose settings to restart
     except Exception as e:
         print("a different exception ", e)
         db.close()
