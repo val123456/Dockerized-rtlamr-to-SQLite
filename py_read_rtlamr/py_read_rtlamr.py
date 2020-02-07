@@ -77,6 +77,7 @@ for i in meter_ids:
     last[i] = 0
 
 # rounding constant for readings
+# change to 1 or even 0 if you want to decrease number of data points
 rnd = 2
 
 # how often to checkpoint database, to minimize data loss if there is a system failure, etc
@@ -97,6 +98,7 @@ con = db.cursor()
 # uses 'if not exists' for subsequents re-starts
 
 for meter in meter_ids:
+
     # this is for electric meters
     if meter in electric_meter_ids:
         con.execute(
@@ -109,6 +111,7 @@ for meter in meter_ids:
         con.execute('CREATE INDEX IF NOT EXISTS index_{}  ON Electric_Meter_{}(date)'.format(str(meter), str(meter)))
         con.execute('CREATE INDEX IF NOT EXISTS index_use_{}  ON Electric_DailyUse_{}(date)'.format(str(meter), str(meter)))
 
+    # gas meters
     elif meter in gas_meter_ids:
         con.execute(
             'CREATE TABLE IF NOT EXISTS Gas_Meter_{}(id integer PRIMARY KEY, date text, time text, ccf real, fulldatetime text)'.format(
@@ -120,6 +123,7 @@ for meter in meter_ids:
         con.execute('CREATE INDEX IF NOT EXISTS index_{}  ON Gas_Meter_{}(date)'.format(str(meter), str(meter)))
         con.execute('CREATE INDEX IF NOT EXISTS index_use_{}  ON Gas_DailyUse_{}(date)'.format(str(meter), str(meter)))
 
+    # water meters
     elif meter in water_meter_ids:
         con.execute(
             'CREATE TABLE IF NOT EXISTS Water_Meter_{}(id integer PRIMARY KEY, date text, time text, cuft real, fulldatetime text)'.format(
@@ -141,21 +145,31 @@ s, conn, addr = opensocket(port)
 while True:
     try:
 
+        # 1024 grabs enough data for my meters
+        # note if tracking lots of meters there is a theortical chance input will span messages.  I have not seen this in my testing
         rxdata = conn.recv(1024)
         record = {}
         use = None
 
         if rxdata:
             try:
+                # attempt to decode JSON, catch if exception is thrown.  Have seen "invalid" JSON from rtlamr a couple of times
                 raw = json.loads(rxdata)
-                print("Raw ", raw)
-                meter = str(raw['Message']['ID'])
 
                 # save data since it is valid JSON
                 saveinput(rxdata)
 
+                # print data for logs/troubleshooting 
+                print("Raw ", raw)
+
+                # grab meter ID from JSON
+                meter = str(raw['Message']['ID'])
+
                 # now check by meter types based on meter type definitions in variables.txt
+
+                # electric meter processing
                 if meter in electric_meter_ids:
+                    # check and see if the reading has changed.  Skip processing if not changed
                     if last[meter] != round(raw['Message']['Consumption'] / electric_cnv, rnd):
                         record['Meter'] = raw['Message']['ID']
                         record['DateTime'] = datetime.datetime.strptime(raw['Time'].split('.', 1)[0], DATETIME_FORMAT)
@@ -194,7 +208,9 @@ while True:
 
                         last[meter] = round(raw['Message']['Consumption'] / electric_cnv, rnd)
 
+                # gas meter processing
                 elif meter in gas_meter_ids:
+                    # check and see if the reading has changed.  Skip processing if not changed
                     if last[meter] != round(raw['Message']['Consumption'] / gas_cnv, rnd):
                         record['Meter'] = raw['Message']['ID']
                         record['DateTime'] = datetime.datetime.strptime(raw['Time'].split('.', 1)[0], DATETIME_FORMAT)
@@ -233,7 +249,9 @@ while True:
 
                         last[meter] = round(raw['Message']['Consumption'] / gas_cnv, rnd)
 
+                # water meter processing
                 elif meter in water_meter_ids:
+                    # check and see if the reading has changed.  Skip processing if not changed
                     if last[meter] != round(raw['Message']['Consumption'] / water_cnv, rnd):
                         record['Meter'] = raw['Message']['ID']
                         record['DateTime'] = datetime.datetime.strptime(raw['Time'].split('.', 1)[0], DATETIME_FORMAT)
