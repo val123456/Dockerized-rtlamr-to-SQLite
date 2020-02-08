@@ -66,8 +66,4 @@ total 19M
 -rw-r--r-- 1 root root  50K Feb  8 08:03 meters.db-wal
 -rw-rw-r-- 1 root root  11M Feb  8 08:03 raw_output.json
 ```
-Note this data set has 39 days of data with 4 meters (two electric, one water, and one gas).  `meters.db` time will be updated after every checkpoint (after every 5 additions).
-
-
-
-
+Note this data set has 39 days of data with 4 meters (two electric, one water, and one gas).  `meters.db` time will be updated after every checkpoint (after every 5 additions).  `raw_output.json` has 56,949 lines of raw input.
