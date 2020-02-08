@@ -61,10 +61,10 @@ You can make sure the database and raw inputs are being updated by looking at th
 
 ```bash
 total 19M
--rw-r--r-- 1 val val 8.5M Feb  8 08:00 meters.db
--rw-r--r-- 1 val val  32K Feb  8 08:03 meters.db-shm
--rw-r--r-- 1 val val  50K Feb  8 08:03 meters.db-wal
--rw-rw-r-- 1 val val  11M Feb  8 08:03 raw_output.json
+-rw-r--r-- 1 root root 8.5M Feb  8 08:00 meters.db
+-rw-r--r-- 1 root root  32K Feb  8 08:03 meters.db-shm
+-rw-r--r-- 1 root root  50K Feb  8 08:03 meters.db-wal
+-rw-rw-r-- 1 root root  11M Feb  8 08:03 raw_output.json
 ```
 Note this data set has 39 days of data with 4 meters (two electric, one water, and one gas).  `meters.db` time will be updated after every checkpoint (after every 5 additions).
 
