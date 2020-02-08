@@ -17,7 +17,6 @@ services:
       - rtlamr
     volumes:
       - ../data:/data:rw
-      # - .tmp/share:/tmp/share:rw
 
 
   rtl_tcp:
