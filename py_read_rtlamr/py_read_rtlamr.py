@@ -198,7 +198,7 @@ while True:
                 saveinput(rxdata)
 
                 # print data for logs/troubleshooting
-                print("Raw ", rxdata)
+                print("Raw ", rxdata.decode("utf-8").strip("\n"))
 
                 # grab meter ID from JSON
                 meter = str(raw["Message"]["ID"])
